@@ -1,8 +1,9 @@
 {
   "name": "cross-vue",
-  "version": "1.0.2",
-  "description": "An all-in-one starter pack for vue with mobile and desktop apps",
+  "version": "1.0.3",
+  "description": "An all-in-one starter pack for Vue with mobile and desktop apps",
   "main": "./src/main.ts",
+  "type": "module",
   "scripts": {
     "dev": "run-func ./scripts/index.js dev",
     "dev-ios": "run-func ./scripts/index.js devIos",
@@ -12,25 +13,28 @@
     "build-ios": "run-func ./scripts/index.js buildIos",
     "build-android": "run-func ./scripts/index.js buildAndroid",
     "build-tauri": "run-func ./scripts/index.js buildTauri",
-    "preview": "run-func ../scripts/index.js preview",
-    "preview-ios": "run-func ../scripts/index.js previewIos",
-    "preview-android": "run-func ../scripts/index.js previewAndroid",
+    "preview": "run-func ./scripts/index.js preview",
+    "preview-ios": "run-func ./scripts/index.js previewIos",
+    "preview-android": "run-func ./scripts/index.js previewAndroid",
     "lint": "run-func ./scripts/index.js lint",
     "format": "run-func ./scripts/index.js format",
     "project-setup": "run-func ./scripts/houseKeeping.js projectSetup",
     "pre-build": "run-func ./scripts/index.js preBuild",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"No tests configured yet\" && exit 0"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hermit-node/p-ionic-flask"
+    "url": "git+https://github.com/hermit-node/p-ionic-flask.git"
   },
   "author": "Sravan Suresh - hermitnode branched",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/hermit-node/p-ionic-flask/issues"
   },
-  "homepage": "https://github.com/hermit-node/p-ionic-flask/cross-web#readme",
+  "homepage": "https://github.com/hermit-node/p-ionic-flask#readme",
+  "engines": {
+    "node": ">=22"
+  },
   "dependencies": {
     "@capacitor/android": "^5.6.0",
     "@capacitor/app": "5.0.6",
@@ -51,8 +55,8 @@
     "@commitlint/cli": "^18.4.4",
     "@commitlint/config-conventional": "^18.4.4",
     "@tauri-apps/cli": "^1.5.9",
-    "@tsconfig/node23": "^23.0.1",
-    "@types/node": "^18.19.8",
+    "@tsconfig/node22": "^22.0.2",
+    "@types/node": "^22.15.0",
     "@typescript-eslint/eslint-plugin": "^8.30.1",
     "@typescript-eslint/parser": "^8.30.1",
     "@unocss/transformer-directives": "^66.1.0-beta.11",
@@ -79,6 +83,5 @@
     "vite": "^6.2.6",
     "vite-tsconfig-paths": "^5.1.4",
     "vue-tsc": "^2.2.8"
-  },
-  "type": "module"
+  }
 }

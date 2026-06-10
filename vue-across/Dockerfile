@@ -1,16 +1,12 @@
-# vue-across/Dockerfile
-FROM node:23-alpine
+# Build-only frontend container.
+# The compose file mounts ./vue-across/dist to /app/dist so the runtime build writes to the host.
+FROM node:22-alpine
 
 WORKDIR /app
 
-COPY ./package*.json ./
+COPY package*.json ./
 RUN npm install --legacy-peer-deps
 
 COPY . .
 
-RUN npm run build
-
-# Optional: for debugging or separate container runtime
-CMD ["npm", "run", "dev"]
-
-# If you’re using this purely for build, don’t expose ports here
+CMD ["npm", "run", "build"]

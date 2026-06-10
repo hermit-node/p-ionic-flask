@@ -1,24 +1,28 @@
-version: '3.8'
-
 services:
   frontend-builder:
     build:
       context: ./vue-across
     volumes:
-      - ./vue-across/dist:/app/dist  # output path
-    command: [ "echo", "build complete" ]  # dummy run, just triggers build
+      - ./vue-across/dist:/app/dist
+    command: ["npm", "run", "build"]
+
   backend:
-    build: ./flask-back
+    build:
+      context: ./flask-back
     container_name: flask-backend
     ports:
-      - "7143:5000"  # Expose backend (Flask) at port 7143 on host
+      - "7143:5000"
     environment:
-      - DATABASE_URL=postgresql://postgres:postgres@db:5432/mydb
+      DATABASE_URL: postgresql://postgres:postgres@db:5432/mydb
+      FRONTEND_DIST: /app/frontend/dist
     depends_on:
-      - db
+      db:
+        condition: service_started
+      frontend-builder:
+        condition: service_completed_successfully
     volumes:
       - ./flask-back:/app
-      - ./vue-across/dist:/app/frontend/dist  # Serve built Vue app
+      - ./vue-across/dist:/app/frontend/dist
     networks:
       - app-network
 

@@ -1,11 +1,17 @@
-FROM python:3.11-slim
+FROM python:3.12-slim
 
 WORKDIR /app
 
-# Install deps
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PIP_NO_CACHE_DIR=1
 
-# Copy your Flask app
+COPY requirements.txt .
+RUN python -m pip install --upgrade pip \
+    && pip install -r requirements.txt
+
 COPY . .
-RUN pip install --no-cache-dir -r requirements.txt
-# Expose Flask app through Gunicorn
-CMD ["gunicorn", "-b", "0.0.0.0:5000", "app:app"]
+
+EXPOSE 5000
+
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "--workers", "2", "--timeout", "60", "app:app"]
