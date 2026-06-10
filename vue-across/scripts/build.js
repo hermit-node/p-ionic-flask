@@ -4,27 +4,28 @@ export const buildCommand = 'npx vue-tsc --noEmit && npx vite build';
 
 // Build commands
 /**
- * It runs the vue-tsc compiler with the --noEmit flag, which means it will only type-check the code,
- * and then it runs the vite build command.
- *
- * Use sync execution here so Docker/npm does not finish before the build process exits.
+ * Type-checks the Vue app and builds it with Vite.
  */
-export const build = () => executeWithSync(buildCommand);
+export const build = () => {
+	executeWithSync(buildCommand);
+};
 
 /**
- * It builds the app, then copies the iOS platform files to the `ios` directory.
+ * Builds the app, then syncs the iOS Capacitor platform.
  */
 export const buildIos = () => {
 	updateCapacitorConfig();
-	return executeWithSync(`${buildCommand} && npx cap sync ios`);
+	executeWithSync(`${buildCommand} && npx cap sync ios`);
 };
 
 /**
- * `buildAndroid` builds the app, then copies the Android platform to the `android` directory.
+ * Builds the app, then syncs the Android Capacitor platform.
  */
 export const buildAndroid = () => {
 	updateCapacitorConfig();
-	return executeWithSync(`${buildCommand} && npx cap sync android`);
+	executeWithSync(`${buildCommand} && npx cap sync android`);
 };
 
-export const buildTauri = () => executeWithSync('npx tauri build');
+export const buildTauri = () => {
+	executeWithSync('npx tauri build');
+};

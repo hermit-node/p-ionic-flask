@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from '@ionic/vue-router';
+import { useRouter } from 'vue-router';
 import { routes } from 'vue-router/auto/routes';
 
 export const routerCreated = createRouter({
@@ -10,8 +11,9 @@ export const routerCreated = createRouter({
  * Router instance hoisted - src/router-old/index
  */
 export let $router: ReturnType<typeof useRouter>;
+
 /**
- * To have access to router-old initalised in setup context available throughout the app - src/router-old/index
+ * To have access to router-old initialised in setup context available throughout the app - src/router-old/index
  */
 export function hoistRouter() {
 	if (!$router) {

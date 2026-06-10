@@ -8,7 +8,7 @@ import path from 'node:path';
 import { serverPort } from '../build/config.js';
 
 /**
- * It executes a command and logs the output to the console
+ * Executes a command async and logs the output.
  */
 export const execute = (command) =>
 	exec(command, (err, stdout, stderr) => {
@@ -18,22 +18,31 @@ export const execute = (command) =>
 	});
 
 /**
- * It executes a command with sync ( for live loading commands like dev ) and prints the output to the console
+ * Executes a command synchronously and prints the output.
+ *
+ * Important:
+ * execSync(..., { stdio: 'inherit' }) returns null.
+ * run-func checks `result.then` when typeof result === 'object',
+ * and typeof null === 'object', so returning null crashes run-func.
+ *
+ * Therefore this function intentionally returns undefined.
  */
-export const executeWithSync = (command) => execSync(command, { stdio: 'inherit' });
+export const executeWithSync = (command) => {
+	execSync(command, { stdio: 'inherit' });
+};
 
 /**
- * Get the IPv4 address of the first network interface that isn't internal
+ * Get the IPv4 address of the first network interface that isn't internal.
  */
 const getIP = () =>
 	Object.values(os.networkInterfaces())
 		.flat()
-		.filter((item) => !item.internal && item.family === 'IPv4')
-		.find(Boolean).address;
+		.filter((item) => item && !item.internal && item.family === 'IPv4')
+		.find(Boolean)?.address || '127.0.0.1';
 
 /**
  * It reads the capacitor.config.json file, deletes the server property if it exists, and then adds it
- * back in with the correct IP address and port
+ * back in with the correct IP address and port.
  * @param [addLiveServer=false] - boolean - if true, the capacitor.config.json file will be updated
  * with the live server url.
  */
