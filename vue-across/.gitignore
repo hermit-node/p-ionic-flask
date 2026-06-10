@@ -1,0 +1,52 @@
+.DS_Store
+node_modules
+/dist
+.husky
+
+# local env files
+.env.local
+.env.*.local
+Thumbs.db
+.idea/
+.vscode/
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Editor directories and files
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+.env
+*.sqlite
+*.db
+
+# Flask
+instance/
+.webassets-cache
+
+# Node / Ionic / Vue / frontend
+node_modules/
+dist/
+build/
+.output/
+.nuxt/
+.vite/
+coverage/
+
+# Local secrets
+*.local
+.env.*
+!.env.example
