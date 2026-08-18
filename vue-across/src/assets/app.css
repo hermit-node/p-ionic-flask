@@ -1,4 +1,587 @@
-/* If you feel like your html is becoming dirty with alot of classes, use @apply multiple classes to one and use that */
-.welcome-page {
-	@apply justify-center m-0 p-3;
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap');
+
+:root {
+	--site-ink: #17211d;
+	--site-muted: #627069;
+	--site-paper: #f4f7f2;
+	--site-line: #dbe3dc;
+	--site-green: #2d8f66;
+	--site-green-dark: #1e684a;
+	--ion-font-family: 'DM Sans', sans-serif;
+	--ion-color-primary: #2d8f66;
+	--ion-color-primary-rgb: 45, 143, 102;
+	--ion-color-primary-contrast: #ffffff;
+	--ion-color-primary-contrast-rgb: 255, 255, 255;
+	--ion-color-primary-shade: #287e5a;
+	--ion-color-primary-tint: #429a75;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	color: var(--site-ink);
+	background: var(--site-paper);
+}
+
+.site-header {
+	box-shadow: none;
+}
+
+.site-header::after {
+	display: none;
+}
+
+.site-toolbar {
+	--background: rgba(244, 247, 242, 0.94);
+	--border-width: 0 0 1px;
+	--border-color: rgba(23, 33, 29, 0.09);
+	--min-height: 76px;
+	backdrop-filter: blur(18px);
+}
+
+.site-nav {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: min(1180px, calc(100% - 48px));
+	min-height: 76px;
+	margin: 0 auto;
+}
+
+.site-brand {
+	display: inline-flex;
+	align-items: center;
+	gap: 10px;
+	color: var(--site-ink);
+	font-family: 'Manrope', sans-serif;
+	font-size: 18px;
+	font-weight: 800;
+	letter-spacing: -0.04em;
+	text-decoration: none;
+}
+
+.site-brand__mark {
+	display: grid;
+	width: 38px;
+	height: 35px;
+	place-items: center;
+	border-radius: 11px 11px 11px 3px;
+	color: #fff;
+	background: var(--site-green);
+	font-size: 11px;
+	letter-spacing: -0.03em;
+}
+
+.desktop-nav {
+	display: flex;
+	align-items: center;
+	gap: 34px;
+}
+
+.desktop-nav a {
+	position: relative;
+	color: #4c5a53;
+	font-size: 14px;
+	font-weight: 600;
+	text-decoration: none;
+}
+
+.desktop-nav a::after {
+	position: absolute;
+	right: 0;
+	bottom: -9px;
+	left: 0;
+	height: 2px;
+	content: '';
+	background: var(--site-green);
+	transform: scaleX(0);
+	transition: transform 180ms ease;
+}
+
+.desktop-nav a:hover::after,
+.desktop-nav a.router-link-active::after {
+	transform: scaleX(1);
+}
+
+.site-nav__actions {
+	display: flex;
+	align-items: center;
+}
+
+.desktop-nav__cta,
+.hero-actions ion-button {
+	--border-radius: 10px;
+	--box-shadow: none;
+	font-size: 13px;
+	font-weight: 700;
+	text-transform: none;
+}
+
+.mobile-menu-button {
+	display: none;
+	width: 42px;
+	height: 42px;
+	color: var(--site-ink);
+}
+
+.site-content {
+	--background: var(--site-paper);
+}
+
+.home-page {
+	overflow: hidden;
+	background: var(--site-paper);
+}
+
+.home-container {
+	width: min(1180px, calc(100% - 32px));
+	max-width: none;
+	margin: 0 auto;
+	padding: 0;
+}
+
+.hero-section {
+	position: relative;
+	background:
+		radial-gradient(circle at 82% 22%, rgba(178, 234, 205, 0.65), transparent 32%),
+		radial-gradient(circle at 6% 94%, rgba(221, 230, 207, 0.7), transparent 28%),
+		var(--site-paper);
+}
+
+.hero-row {
+	min-height: 680px;
+	padding: 72px 0 88px;
+}
+
+.hero-row > ion-col {
+	padding: 16px 24px;
+}
+
+.hero-copy {
+	position: relative;
+	z-index: 1;
+}
+
+.hero-kicker,
+.section-heading > ion-badge {
+	--padding-start: 12px;
+	--padding-end: 12px;
+	padding-top: 7px;
+	padding-bottom: 7px;
+	border-radius: 999px;
+	font-size: 10px;
+	font-weight: 700;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+}
+
+.hero-copy h1,
+.section-heading h2 {
+	margin: 20px 0 0;
+	color: var(--site-ink);
+	font-family: 'Manrope', sans-serif;
+	font-weight: 800;
+	letter-spacing: -0.055em;
+}
+
+.hero-copy h1 {
+	font-size: clamp(48px, 5.2vw, 72px);
+	line-height: 0.99;
+}
+
+.hero-copy h1 em {
+	color: var(--site-green);
+	font-style: normal;
+}
+
+.hero-copy__lede {
+	max-width: 570px;
+	margin: 27px 0 0;
+	color: var(--site-muted);
+	font-size: 17px;
+	line-height: 1.75;
+}
+
+.hero-actions {
+	display: flex;
+	align-items: center;
+	margin-top: 30px;
+	gap: 8px;
+}
+
+.hero-actions ion-button[fill='clear'] {
+	--color: var(--site-green-dark);
+}
+
+.platform-chips {
+	display: flex;
+	flex-wrap: wrap;
+	margin-top: 35px;
+	gap: 4px;
+}
+
+.platform-chips ion-chip {
+	--background: rgba(255, 255, 255, 0.64);
+	--color: #526159;
+	height: 30px;
+	border: 1px solid rgba(45, 90, 68, 0.1);
+	font-size: 11px;
+	font-weight: 700;
+}
+
+.starter-card {
+	--background: rgba(255, 255, 255, 0.95);
+	margin: 0;
+	border: 1px solid rgba(31, 66, 50, 0.11);
+	border-radius: 22px;
+	box-shadow: 0 30px 75px rgba(39, 78, 59, 0.16);
+}
+
+.starter-card ion-card-header {
+	padding: 28px 28px 15px;
+}
+
+.starter-card ion-card-content {
+	padding: 10px 20px 24px;
+}
+
+.card-heading-row {
+	display: flex;
+	align-items: start;
+	justify-content: space-between;
+	gap: 16px;
+}
+
+.card-heading-row ion-card-subtitle {
+	margin-bottom: 7px;
+	color: var(--site-green);
+	font-size: 10px;
+	letter-spacing: 0.12em;
+}
+
+.card-heading-row ion-card-title {
+	color: var(--site-ink);
+	font-family: 'Manrope', sans-serif;
+	font-size: 27px;
+	font-weight: 800;
+	letter-spacing: -0.04em;
+}
+
+.card-heading-row ion-badge {
+	padding: 7px 10px;
+	border-radius: 999px;
+}
+
+.store-message {
+	margin: 6px 8px 17px;
+	padding: 17px 18px;
+	border: 1px solid #dbe9df;
+	border-radius: 14px;
+	background: #eff8f2;
+}
+
+.store-message strong {
+	color: var(--site-green-dark);
+	font-size: 12px;
+}
+
+.store-message p {
+	margin: 6px 0 0;
+	color: #65736b;
+	font-size: 12px;
+	line-height: 1.55;
+}
+
+.status-list {
+	padding: 0;
+	background: transparent;
+}
+
+.status-list ion-item {
+	--background: transparent;
+	--padding-start: 8px;
+	--inner-padding-end: 8px;
+	--min-height: 68px;
+}
+
+.status-list ion-label strong {
+	color: var(--site-ink);
+	font-size: 13px;
+}
+
+.status-list ion-label p {
+	margin-top: 4px;
+	color: #7a8780;
+	font-size: 11px;
+}
+
+.status-list ion-note {
+	font-size: 10px;
+	font-weight: 700;
+}
+
+.feature-section {
+	padding: 92px 0 104px;
+	border-top: 1px solid var(--site-line);
+	background: #fff;
+}
+
+.section-heading {
+	padding: 8px 16px 34px;
+}
+
+.section-heading h2 {
+	font-size: clamp(36px, 4vw, 53px);
+	line-height: 1.08;
+}
+
+.section-heading p {
+	max-width: 650px;
+	margin: 19px 0 0;
+	color: var(--site-muted);
+	font-size: 15px;
+	line-height: 1.75;
+}
+
+.feature-grid ion-col {
+	display: flex;
+	padding: 10px;
+}
+
+.feature-card {
+	--background: #f8faf7;
+	width: 100%;
+	min-height: 260px;
+	margin: 0;
+	border: 1px solid var(--site-line);
+	border-radius: 18px;
+	box-shadow: none;
+	transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.feature-card:hover {
+	box-shadow: 0 18px 45px rgba(39, 78, 59, 0.1);
+	transform: translateY(-4px);
+}
+
+.feature-card ion-card-header {
+	padding: 25px 24px 10px;
+}
+
+.feature-card ion-card-header ion-badge {
+	align-self: flex-start;
+	margin-bottom: 34px;
+	padding: 6px 8px;
+	border-radius: 7px;
+}
+
+.feature-card ion-card-title {
+	color: var(--site-ink);
+	font-family: 'Manrope', sans-serif;
+	font-size: 19px;
+	font-weight: 800;
+	letter-spacing: -0.025em;
+}
+
+.feature-card ion-card-content {
+	padding: 6px 24px 22px;
+}
+
+.feature-card ion-card-content p {
+	min-height: 68px;
+	margin: 0 0 18px;
+	color: var(--site-muted);
+	font-size: 13px;
+	line-height: 1.65;
+}
+
+.feature-card ion-chip {
+	--background: #e8f3ec;
+	--color: var(--site-green-dark);
+	height: 29px;
+	font-size: 10px;
+	font-weight: 700;
+}
+
+ion-menu {
+	--width: min(84vw, 340px);
+}
+
+ion-menu::part(container) {
+	border-radius: 22px 0 0 22px;
+	box-shadow: -22px 0 65px rgba(21, 48, 36, 0.2);
+}
+
+.mobile-drawer {
+	--background: #f5f8f3;
+	--padding-top: 16px;
+	--padding-start: 14px;
+	--padding-end: 14px;
+}
+
+.mobile-drawer__eyebrow {
+	margin: 12px 12px 10px;
+	color: #849087;
+	font-size: 10px;
+	font-weight: 700;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+}
+
+.mobile-drawer ion-list {
+	background: transparent;
+}
+
+.mobile-drawer ion-item {
+	--min-height: 54px;
+	--padding-start: 15px;
+	--border-radius: 12px;
+	--background: transparent;
+	--color: var(--site-ink);
+	margin-bottom: 5px;
+	font-family: 'Manrope', sans-serif;
+	font-size: 17px;
+	font-weight: 700;
+}
+
+.mobile-drawer ion-item:hover {
+	--background: #e5eee7;
+}
+
+.mobile-drawer__footer {
+	position: absolute;
+	right: 26px;
+	bottom: 34px;
+	left: 26px;
+	display: grid;
+	padding-top: 22px;
+	border-top: 1px solid var(--site-line);
+	color: #87938c;
+	font-size: 10px;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	gap: 7px;
+}
+
+.mobile-drawer__footer strong {
+	color: #3e4d45;
+	font-size: 12px;
+	letter-spacing: 0;
+	text-transform: none;
+}
+
+@media (max-width: 991px) {
+	.hero-row {
+		padding-top: 55px;
+	}
+
+	.hero-copy {
+		padding-bottom: 40px !important;
+		text-align: center;
+	}
+
+	.hero-copy__lede {
+		margin-right: auto;
+		margin-left: auto;
+	}
+
+	.hero-actions,
+	.platform-chips {
+		justify-content: center;
+	}
+
+	.starter-card {
+		max-width: 660px;
+		margin: 0 auto;
+	}
+}
+
+@media (max-width: 900px) {
+	.site-nav {
+		width: min(100% - 32px, 1180px);
+		min-height: 68px;
+	}
+
+	.site-toolbar {
+		--min-height: 68px;
+	}
+
+	.desktop-nav,
+	.desktop-nav__cta {
+		display: none;
+	}
+
+	.mobile-menu-button {
+		display: block;
+	}
+}
+
+@media (max-width: 640px) {
+	.site-brand {
+		font-size: 16px;
+	}
+
+	.hero-row {
+		padding: 38px 0 64px;
+	}
+
+	.hero-row > ion-col {
+		padding-right: 8px;
+		padding-left: 8px;
+	}
+
+	.hero-copy h1 {
+		font-size: clamp(42px, 13vw, 58px);
+	}
+
+	.hero-copy__lede {
+		font-size: 15px;
+		line-height: 1.65;
+	}
+
+	.hero-actions {
+		align-items: stretch;
+		flex-direction: column;
+		gap: 0;
+	}
+
+	.platform-chips {
+		margin-top: 24px;
+	}
+
+	.starter-card ion-card-header {
+		padding: 22px 20px 12px;
+	}
+
+	.starter-card ion-card-content {
+		padding: 8px 12px 18px;
+	}
+
+	.card-heading-row ion-card-title {
+		font-size: 23px;
+	}
+
+	.feature-section {
+		padding: 68px 0 72px;
+	}
+
+	.feature-card {
+		min-height: auto;
+	}
+
+	.feature-card ion-card-content p {
+		min-height: auto;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+
+	* {
+		transition-duration: 0.01ms !important;
+	}
 }
